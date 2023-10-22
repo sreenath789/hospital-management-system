@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IPatientRepo extends JpaRepository<Patient,Integer> {
 
+    Patient findFirstByPatientEmail(String newEmail);
 }

@@ -26,4 +26,5 @@ public class Patient {
     @Length(min=10,max=10,message = "Enter a valid phone number")
     private String phoneNumber;
     private String symptom;
+    private String password;
 }

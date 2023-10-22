@@ -3,7 +3,10 @@ package com.example.hospitalmanagementsystem.controller;
 import com.example.hospitalmanagementsystem.model.Doctor;
 import com.example.hospitalmanagementsystem.model.Patient;
 import com.example.hospitalmanagementsystem.model.Patient;
+import com.example.hospitalmanagementsystem.model.dto.SignInInput;
+import com.example.hospitalmanagementsystem.model.dto.SignUpOutput;
 import com.example.hospitalmanagementsystem.service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +21,17 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
-    @PostMapping("patient")
-    public ResponseEntity<String> addPatient(@RequestBody Patient patient){
-        return patientService.addPatient(patient);
+    @PostMapping("patient/signup")
+    public SignUpOutput signUpPatient(@RequestBody @Valid Patient patient)
+    {
+        return patientService.signUpPatient(patient);
     }
 
-    @DeleteMapping("patient/{id}")
-    public ResponseEntity<String> deletePatient(@PathVariable int id){
-        return patientService.deletePatient(id);
+    @PostMapping("patient/signin")
+    public String signInPatient(@RequestBody @Valid SignInInput signInInput)
+    {
+        return patientService.signInPatient(signInInput);
     }
 
-    @GetMapping("patients")
-    public List<Patient> getAllPatients(){
-        return patientService.getAllPatients();
-    }
-
-    @GetMapping("patient/{id}")
-    public ResponseEntity<String> getPatientById(@PathVariable int id){
-        return patientService.getPatientById(id);
-    }
 
 }
